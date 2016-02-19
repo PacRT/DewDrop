@@ -1,0 +1,8 @@
+before running this server in your local env follow the steps below
+run pkiTLScacerts.sh - it will create the TLS CA certs chain
+edit the pkiservercerts.sh and place your proper domain name and then run pkiservercerts.sh
+then run pkiclientcerts.sh
+
+ OR
+
+Bring your own certificates
