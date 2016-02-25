@@ -1,4 +1,5 @@
-var file = require('fs').readFileSync
+var file    = require('fs').readFileSync
+var path    = require('path');
 
 module.exports =
 {
@@ -11,6 +12,7 @@ module.exports =
         passphrase: 'pass',
         requestCert: true,
         rejectUnauthorized: true
+        // ca: [file('crypto_objects/certs/root-ca.crt'), file('crypto_objects/certs/tls-ca.crt')]
     },
 
     mqtt:

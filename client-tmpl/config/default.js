@@ -6,11 +6,12 @@ module.exports =
     mqtts:
     {
         port: 8883,
-        pfx: file("crypto_objects/certs/pacrt.io.p12"),
+        pfx: file("crypto_objects/certs/device10.p12"),
         crl: [file('crypto_objects/crls/tls-ca.crl'), file('crypto_objects/crls/root-ca.crl')],
         passphrase: 'pass',
         requestCert: true,
         rejectUnauthorized: true
+        // ca: [file('crypto_objects/certs/root-ca.crt'), file('crypto_objects/certs/tls-ca.crt')]
     },
 
     mqtt:
@@ -20,7 +21,7 @@ module.exports =
 
     wss: {
         port: 8443,
-        pfx: file("crypto_objects/certs/pacrt.io.p12"),
+        pfx: file("crypto_objects/certs/device10.p12"),
         passphrase: 'pass'
     },
 

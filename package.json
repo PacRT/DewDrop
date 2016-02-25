@@ -1,0 +1,31 @@
+{
+  "name": "dewdrop",
+  "version": "1.0.0",
+  "description": "DewDrop Bare Bone ",
+  "main": "mqttserver.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PacRT/DewDrop.git"
+  },
+  "keywords": [
+    "DewDrop",
+    "mRT",
+    "HAccS"
+  ],
+  "author": "Chiradip Mandal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PacRT/DewDrop/issues"
+  },
+  "homepage": "https://github.com/PacRT/DewDrop#readme",
+  "dependencies": {
+    "aedes": "^0.12.5",
+    "bunyan": "^1.6.0",
+    "config": "^1.19.0",
+    "mqtt-packet": "^4.1.0",
+    "websocket-stream": "^3.1.0"
+  }
+}

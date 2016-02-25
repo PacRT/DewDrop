@@ -1,0 +1,22 @@
+{
+  "name": "client-tmpl",
+  "version": "1.0.0",
+  "description": "DewDrop Client Template",
+  "main": "dewdrop-client.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "DewDrop",
+    "Client",
+    "Template"
+  ],
+  "author": "Chiradip Mandal",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^1.19.0",
+    "mqtt": "^1.7.2",
+    "msgpack5": "^3.3.0",
+    "string-template": "^1.0.0"
+  }
+}

@@ -1,0 +1,91 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 2 (0x2)
+    Signature Algorithm: sha1WithRSAEncryption
+        Issuer: C=US, O=PacRT DOT IO, OU=PacRT Certificate Authority, CN=PacRT Root CA
+        Validity
+            Not Before: Feb 19 23:52:51 2016 GMT
+            Not After : Feb 18 23:52:51 2026 GMT
+        Subject: C=US, O=PacRT DOT IO, OU=PacRT Certificate Authority, CN=PacRT TLS CA
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:db:10:e2:7c:61:ff:c7:54:8b:44:2c:07:4f:cc:
+                    bf:a5:a9:3e:be:f3:59:16:83:c6:3c:e3:77:0b:3b:
+                    f6:c0:40:ed:b9:a4:fe:e8:0f:b8:98:1f:5d:dc:6d:
+                    5b:6c:90:f2:5b:f7:42:b9:85:f5:0a:99:c1:ce:9c:
+                    cd:3d:44:43:6c:52:1c:c4:ec:b0:1b:f0:cb:80:33:
+                    0e:b9:16:f2:13:05:bc:fb:df:ec:5e:a2:17:69:26:
+                    56:75:5e:9d:60:c8:04:65:12:57:c8:4f:cd:52:d9:
+                    a2:ee:18:4b:d0:c0:d3:29:8d:47:da:c8:41:50:7b:
+                    81:68:0a:0d:5e:db:c0:d2:af:33:fa:cd:c4:a2:9e:
+                    1b:4a:63:0c:c7:93:c4:2a:fa:2c:75:b6:47:2f:88:
+                    c5:2b:97:fc:8c:b9:3b:5d:a3:93:96:34:43:93:9f:
+                    94:59:cd:10:18:7c:ac:4d:b8:59:ed:c1:29:cb:fe:
+                    6a:1f:ad:d6:2a:5c:d6:0f:65:62:f7:22:73:8f:d2:
+                    fd:3e:d2:84:b6:ae:6b:82:63:d2:2f:da:18:33:20:
+                    3a:2c:55:0e:85:97:de:12:86:86:82:2c:cc:61:0b:
+                    2c:09:ab:8e:0d:9c:ee:8a:00:6f:6f:51:29:09:5d:
+                    68:92:fa:52:e3:03:6f:69:4a:d3:d3:51:8f:dc:e2:
+                    87:b7
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Key Usage: critical
+                Certificate Sign, CRL Sign
+            X509v3 Basic Constraints: critical
+                CA:TRUE, pathlen:0
+            X509v3 Subject Key Identifier: 
+                33:F2:1E:3F:96:62:42:49:69:06:7B:EF:EF:4C:6F:8E:D4:D2:64:C2
+            X509v3 Authority Key Identifier: 
+                keyid:14:CC:2E:EF:5A:7E:70:B6:FB:9D:5B:25:A1:37:8E:E4:6B:F1:93:CF
+
+            Authority Information Access: 
+                CA Issuers - URI:http://ca.pacrt.io/ca/root-ca.cer
+
+            X509v3 CRL Distribution Points: 
+
+                Full Name:
+                  URI:http://ca.pacrt.io/ca/root-ca.crl
+
+    Signature Algorithm: sha1WithRSAEncryption
+         82:6b:0e:62:fc:a8:95:a5:96:a4:6d:1b:99:ab:da:c2:57:f5:
+         a8:2c:d0:41:f1:d4:c4:e1:33:43:5c:23:f2:aa:98:08:da:57:
+         5a:7b:ac:67:76:ff:ca:69:fd:b0:0a:fb:3d:56:90:52:b1:60:
+         d9:76:ed:0e:9f:bc:58:e8:f5:3f:42:aa:ad:6a:59:e6:ba:51:
+         b0:9b:af:05:36:3b:f4:fd:c1:5f:df:f7:4d:cd:26:4f:9b:2b:
+         a4:3a:58:0f:0a:4c:ce:97:70:18:18:e7:b8:2d:24:99:2b:b1:
+         74:00:74:4e:e6:d3:03:23:c2:b5:a8:bc:d6:0a:9b:3a:c6:0f:
+         f6:c4:0f:0d:5b:47:e3:32:39:00:3f:d8:78:4c:81:8a:d8:93:
+         7c:13:13:95:7b:93:d1:42:67:c3:99:0f:e2:07:54:65:96:f6:
+         38:7c:78:10:68:b7:65:09:ae:a1:ca:3f:f7:08:cc:e5:89:ba:
+         6c:5c:8b:a5:a9:a7:77:ee:16:06:ca:79:68:0b:fe:7c:3d:b2:
+         00:dc:36:c6:d9:c5:4c:a0:a3:05:dc:a7:20:55:70:06:60:61:
+         c9:f8:d8:39:dc:26:1d:f0:73:c8:a8:97:d1:d4:27:97:17:1e:
+         cb:31:51:bc:48:36:fc:fc:00:ec:e5:6f:59:f6:1d:bb:86:0d:
+         d4:11:80:38
+-----BEGIN CERTIFICATE-----
+MIIEGTCCAwGgAwIBAgIBAjANBgkqhkiG9w0BAQUFADBiMQswCQYDVQQGEwJVUzEV
+MBMGA1UECgwMUGFjUlQgRE9UIElPMSQwIgYDVQQLDBtQYWNSVCBDZXJ0aWZpY2F0
+ZSBBdXRob3JpdHkxFjAUBgNVBAMMDVBhY1JUIFJvb3QgQ0EwHhcNMTYwMjE5MjM1
+MjUxWhcNMjYwMjE4MjM1MjUxWjBhMQswCQYDVQQGEwJVUzEVMBMGA1UECgwMUGFj
+UlQgRE9UIElPMSQwIgYDVQQLDBtQYWNSVCBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkx
+FTATBgNVBAMMDFBhY1JUIFRMUyBDQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
+AQoCggEBANsQ4nxh/8dUi0QsB0/Mv6WpPr7zWRaDxjzjdws79sBA7bmk/ugPuJgf
+XdxtW2yQ8lv3QrmF9QqZwc6czT1EQ2xSHMTssBvwy4AzDrkW8hMFvPvf7F6iF2km
+VnVenWDIBGUSV8hPzVLZou4YS9DA0ymNR9rIQVB7gWgKDV7bwNKvM/rNxKKeG0pj
+DMeTxCr6LHW2Ry+IxSuX/Iy5O12jk5Y0Q5OflFnNEBh8rE24We3BKcv+ah+t1ipc
+1g9lYvcic4/S/T7ShLaua4Jj0i/aGDMgOixVDoWX3hKGhoIszGELLAmrjg2c7ooA
+b29RKQldaJL6UuMDb2lK09NRj9zih7cCAwEAAaOB2jCB1zAOBgNVHQ8BAf8EBAMC
+AQYwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQUM/IeP5ZiQklpBnvv70xv
+jtTSZMIwHwYDVR0jBBgwFoAUFMwu71p+cLb7nVsloTeO5Gvxk88wPQYIKwYBBQUH
+AQEEMTAvMC0GCCsGAQUFBzAChiFodHRwOi8vY2EucGFjcnQuaW8vY2Evcm9vdC1j
+YS5jZXIwMgYDVR0fBCswKTAnoCWgI4YhaHR0cDovL2NhLnBhY3J0LmlvL2NhL3Jv
+b3QtY2EuY3JsMA0GCSqGSIb3DQEBBQUAA4IBAQCCaw5i/KiVpZakbRuZq9rCV/Wo
+LNBB8dTE4TNDXCPyqpgI2ldae6xndv/Kaf2wCvs9VpBSsWDZdu0On7xY6PU/Qqqt
+alnmulGwm68FNjv0/cFf3/dNzSZPmyukOlgPCkzOl3AYGOe4LSSZK7F0AHRO5tMD
+I8K1qLzWCps6xg/2xA8NW0fjMjkAP9h4TIGK2JN8ExOVe5PRQmfDmQ/iB1RllvY4
+fHgQaLdlCa6hyj/3CMzlibpsXIulqad37hYGynloC/58PbIA3DbG2cVMoKMF3Kcg
+VXAGYGHJ+Ng53CYd8HPIqJfR1CeXFx7LMVG8SDb8/ADs5W9Z9h27hg3UEYA4
+-----END CERTIFICATE-----

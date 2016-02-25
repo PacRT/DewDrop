@@ -1,5 +1,5 @@
 var tls       = require('tls');
-var fs        = require('fs');
+//var fs        = require('fs');
 var aedes     = require('aedes')();
 var http      = require('http');
 var https     = require('https');
