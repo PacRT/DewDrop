@@ -78,6 +78,12 @@ aedes.on('unsubscribe', function(unsubscriptions, client) {
 });
 
 aedes.authenticate = function (client, username, password, callback) {
+
+  if(config.auth_scheme.clientcert === true) {
+    var subj = client.conn.getPeerCertificate().subject;
+    log.info('Cert Subject: ', subj);
+    callback(null, true)
+  }
   //callback(null, username === 'matteo')
   log.info('authenticate method is called..');
   callback(null, true);

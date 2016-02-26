@@ -12,7 +12,6 @@ module.exports =
         passphrase: 'pass',
         requestCert: true,
         rejectUnauthorized: true
-        // ca: [file('crypto_objects/certs/root-ca.crt'), file('crypto_objects/certs/tls-ca.crt')]
     },
 
     mqtt:
@@ -29,6 +28,8 @@ module.exports =
     ws: {
         port: 8000,
         host: '0.0.0.0'
-    }
+    },
+
+    auth_scheme: {clientcert: true}
 }
 
