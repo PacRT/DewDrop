@@ -6,3 +6,8 @@ then run pkiclientcerts.sh
  OR
 
 Bring your own certificates
+
+You will see the dtrace warning while running the broker. Errot looks like this 
+{ [Error: Cannot find module './build/default/DTraceProviderBindings'] code: 'MODULE_NOT_FOUND' }
+
+Using npm install --no-optional seems to fix it, raising a ticket about it - needs to be solved sometimes in future - not a blocker.
