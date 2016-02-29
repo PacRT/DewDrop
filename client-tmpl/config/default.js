@@ -10,7 +10,8 @@ module.exports =
         crl: [file('crypto_objects/crls/tls-ca.crl'), file('crypto_objects/crls/root-ca.crl')],
         passphrase: 'pass',
         requestCert: true,
-        rejectUnauthorized: true
+        rejectUnauthorized: true,
+        ca: [file('crypto_objects/certs/root-ca.crt'), file('crypto_objects/certs/tls-ca.crt')]
     },
 
     mqtt:
