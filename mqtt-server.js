@@ -88,3 +88,13 @@ aedes.authenticate = function (client, username, password, callback) {
   log.info('authenticate method is called..');
   callback(null, true);
 }
+
+// Cleanly shut down process on SIGTERM to ensure that perf-<pid>.map gets flushed
+process.on('SIGINT', onSIGINT)
+
+function onSIGINT () {
+  // IMPORTANT to log on stderr, to not clutter stdout which is purely for data, i.e. dtrace stacks
+  console.error('Caught SIGTERM, shutting down.')
+  server.close()
+  process.exit(0)
+}
