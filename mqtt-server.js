@@ -12,6 +12,8 @@ var numClient = 0;
 
 var log = bunyan.createLogger({name: 'DewDropQ'});
 
+var server; // global variable to have a clean EXIT
+
 if(config.has('mqtts')) {
   var options = config.mqtts;
   var mqtts_server = tls.createServer(options, aedes.handle);
@@ -23,6 +25,7 @@ if(config.has('mqtts')) {
 if(config.has('mqtt')) {
   var options = config.mqtt;
   var mqtt_server = net.createServer({}, aedes.handle);
+  server = mqtt_server;
   mqtt_server.listen(config.mqtt.port, function() {
     log.info('DewDropQ (non-TLS) is bound on port ', config.mqtt.port);
   });
@@ -30,6 +33,7 @@ if(config.has('mqtt')) {
 
 if(config.has('ws')) {
   var http_server = http.createServer();
+  server = http_server;
   websocket.createServer({server: http_server}, aedes.handle);
   http_server.listen(config.ws.port, config.ws.host, function() {
     log.info('DewDropQ-WS is bound on port ', config.ws.port);
@@ -39,6 +43,7 @@ if(config.has('ws')) {
 if(config.has('wss')) {
   var options = config.wss;
   var https_server = https.createServer(options);
+  server = https_server;
   websocket.createServer({server: https_server}, aedes.handle);
   https_server.listen(config.wss.port, config.wss.host, function() {
     log.info('DewDropQ-WSS is bound on port ', config.wss.port);
@@ -84,17 +89,40 @@ aedes.authenticate = function (client, username, password, callback) {
     log.info('Cert Subject: ', subj);
     return callback(null, true)
   }
-  //callback(null, username === 'matteo')
+  //callback(null, username === 'xyz')
   log.info('authenticate method is called..');
   callback(null, true);
 }
 
+aedes.authorizePublish = function (client, packet, callback) {
+  log.info('AuthorizePublish is called')
+  if (packet.topic === 'aaaa') {
+    return callback(new Error('wrong topic'))
+  }
+
+  if (packet.topic === 'test/strmv1/certreq') {
+    packet.payload = new Buffer('overwrite packet payload')
+  }
+  callback(null)
+}
+
+aedes.authorizeSubscribe = function (client, sub, callback) {
+  if (sub.topic === 'aaaa') {
+    return cb(new Error('wrong topic'))
+  }
+  if (sub.topic === 'bbb') {
+    // overwrites subscription
+    sub.qos = sub.qos + 128
+  }
+  callback(null, sub)
+}
+
 // Cleanly shut down process on SIGTERM to ensure that perf-<pid>.map gets flushed
-process.on('SIGINT', onSIGINT)
+process.on('SIGINT', onSIGINT);
 
 function onSIGINT () {
   // IMPORTANT to log on stderr, to not clutter stdout which is purely for data, i.e. dtrace stacks
-  console.error('Caught SIGTERM, shutting down.')
-  server.close()
-  process.exit(0)
+  console.error('Caught SIGTERM, shutting down.');
+  server.close();
+  process.exit(0);
 }
