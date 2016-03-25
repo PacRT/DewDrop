@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/PacRT/DewDrop#readme",
   "dependencies": {
-    "aedes": "^0.13.1",
+    "mqstream": "git+https://github.com/PacRT/mqstream.git",
     "bunyan": "^1.6.0",
     "colors": "^1.1.2",
     "config": "^1.19.0",
