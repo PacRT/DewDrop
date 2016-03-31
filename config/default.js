@@ -1,11 +1,10 @@
-var file    = require('fs').readFileSync
-var path    = require('path');
+var file = require('fs').readFileSync
+var path = require('path');
 
 module.exports =
 {
     /** Strike out the options you don't need - mixing options with different security types are dangerous **/
-    mqtts:
-    {
+    mqtts: {
         port: 8883,
         pfx: file('crypto_objects/certs/pacrt.io.p12'),
         //pfx: file('crypto_objects/certs/sensity.com.p12'),
@@ -17,8 +16,7 @@ module.exports =
         ca: [file('crypto_objects/certs/root-ca.crt'), file('crypto_objects/certs/tls-ca.crt')]
     },
 
-    mqtt:
-    {
+    mqtt: {
         port: 1883
     },
 
@@ -33,6 +31,16 @@ module.exports =
         host: '0.0.0.0'
     },
 
-    auth_scheme: {clientcert: true}
+    auth_scheme: {clientcert: true},
+
+    authorizePublish: function (topic, subject, callback) {
+        console.log('Authorize publish from config is called.....')
+        callback(null);
+    },
+
+    authorizeSubscribe: function (topic, subject, callback) {
+        console.log('Authorize subscribe from config is called.....')
+        callback(null);
+    }
 }
 
