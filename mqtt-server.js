@@ -122,13 +122,13 @@ mqstream.authorizePublish = function (client, packet, callback) {
     callback(null)
 }
 
-mqstream.authorizeSubscribe = function (client, sub, callback) {
-    if (sub.topic === 'aaaa') {
+mqstream.authorizeSubscribe = function (client, packet, callback) {
+    if (packet.topic === 'aaaa') {
         return callback(new Error('wrong topic'))
     }
-    if (sub.topic === 'bbb') {
+    if (packet.topic === 'bbb') {
         // overwrites subscription
-        sub.qos = sub.qos + 128
+        packet.qos = packet.qos + 128
     }
     if (config.authorizeSubscribe != null) {
         config.authorizeSubscribe(packet.topic, client.conn.getPeerCertificate().subject, function (err) {
@@ -136,7 +136,7 @@ mqstream.authorizeSubscribe = function (client, sub, callback) {
         });
     }
 
-    callback(null, sub)
+    callback(null, packet)
 }
 
 // Cleanly shut down process on SIGTERM to ensure that perf-<pid>.map gets flushed
