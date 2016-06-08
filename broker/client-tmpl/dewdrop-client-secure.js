@@ -18,7 +18,7 @@ function puts(error, stderr, stdout) {
     console.log('stderr: ', stderr)
 }
 
-var client  = mqtt.connect('mqtt://pacrt.io', config.mqtt);
+var client  = mqtt.connect('mqtts://pacrt.io', config.mqtts);
 //var client  = mqtt.connect('mqtts://secsrv.sensity.com', config.mqtts);
 
 //client.subscribe('/strmv1/gencert/cert/mynodeid');

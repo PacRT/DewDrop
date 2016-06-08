@@ -96,14 +96,15 @@ mqstream.on('unsubscribe', function (unsubscriptions, client) {
 
 mqstream.authenticate = function (client, username, password, callback) {
     // log.info('Client..: ', client);
-    if (config.auth_scheme != null && config.auth_scheme.clientcert === true) {
+    // log.info('Conn: ', client.conn);
+    if (config.auth_scheme != null && client.conn.server.requestCert && config.auth_scheme.clientcert === true) {
         var subj = client.conn.getPeerCertificate().subject;
         log.info('Cert Subject: ', subj);
         return callback(null, true)
+    } else {
+        log.warn('WARNING!!! Be careful unsecured configuration detected');
+        callback(null, true);
     }
-    //callback(null, username === 'xyz')
-    log.info('authenticate method is called..');
-    callback(null, true);
 }
 
 mqstream.authorizePublish = function (client, packet, callback) {
@@ -117,9 +118,15 @@ mqstream.authorizePublish = function (client, packet, callback) {
         return callback(null);
     }
     if (config.authorizePublish != null) {
-        config.authorizePublish(packet.topic, client.conn.getPeerCertificate().subject, function (err) {
-            if (err) return callback(new Error('Not authorized to publish on topic: ' + packet.topic))
-        });
+        // log.info('Conn: ', client.conn);
+
+        if(client.conn.server.requestCert) {
+            config.authorizePublish(packet.topic, client.conn.getPeerCertificate().subject, function (err) {
+                if (err) return callback(new Error('Not authorized to publish on topic: ' + packet.topic))
+            });
+        } else {
+            log.warn('CAREFUL!!!! Unsecured connection is being used.. Consider switcching off all the ports except 8883');
+        }
     }
     callback(null)
 }
@@ -133,9 +140,13 @@ mqstream.authorizeSubscribe = function (client, packet, callback) {
         packet.qos = packet.qos + 128
     }
     if (config.authorizeSubscribe != null) {
-        config.authorizeSubscribe(packet.topic, client.conn.getPeerCertificate().subject, function (err) {
-            if (err) return callback(new Error('Not authorized to publish on topic: ' + packet.topic))
-        });
+        if(client.conn.server.requestCert) {
+            config.authorizeSubscribe(packet.topic, client.conn.getPeerCertificate().subject, function (err) {
+                if (err) return callback(new Error('Not authorized to publish on topic: ' + packet.topic))
+            });
+        } else {
+            log.warn('CAREFUL!!!! Unsecured connection is being used.. Consider switcching off all the ports except 8883');
+        }
     }
 
     callback(null, packet)
