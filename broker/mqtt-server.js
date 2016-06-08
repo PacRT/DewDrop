@@ -125,7 +125,7 @@ mqstream.authorizePublish = function (client, packet, callback) {
                 if (err) return callback(new Error('Not authorized to publish on topic: ' + packet.topic))
             });
         } else {
-            log.warn('CAREFUL!!!! Unsecured connection is being used.. Consider switcching off all the ports except 8883');
+            log.warn('CAREFUL!!!! Unsecured connection is being used.. Consider switching off all the ports except 8883');
         }
     }
     callback(null)
@@ -145,7 +145,7 @@ mqstream.authorizeSubscribe = function (client, packet, callback) {
                 if (err) return callback(new Error('Not authorized to publish on topic: ' + packet.topic))
             });
         } else {
-            log.warn('CAREFUL!!!! Unsecured connection is being used.. Consider switcching off all the ports except 8883');
+            log.warn('CAREFUL!!!! Unsecured connection is being used.. Consider switching off all the ports except 8883');
         }
     }
 
