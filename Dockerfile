@@ -8,6 +8,8 @@ MAINTAINER sandeep
 
 # get all the required base packages to build and make
 
+RUN sudo apt-get update 
+
 RUN sudo apt-get --assume-yes install software-properties-common
 
 RUN sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe"
