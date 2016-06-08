@@ -1,3 +1,5 @@
+'use strict';
+
 var tls = require('tls');
 //var fs        = require('fs');
 var mqstream = require('mqstream')();
@@ -93,7 +95,7 @@ mqstream.on('unsubscribe', function (unsubscriptions, client) {
 });
 
 mqstream.authenticate = function (client, username, password, callback) {
-
+    // log.info('Client..: ', client);
     if (config.auth_scheme != null && config.auth_scheme.clientcert === true) {
         var subj = client.conn.getPeerCertificate().subject;
         log.info('Cert Subject: ', subj);
