@@ -1,5 +1,29 @@
 var file = require('fs').readFileSync
-var path = require('path');
+var path = require('path')
+
+var bunyan = require('bunyan')
+
+var levelup = require('levelup')
+var leveldown = require('leveldown')
+var memdown = require('memdown')
+var db = levelup('./db')
+
+var log = bunyan.createLogger({name: "DewDropQ-Config"})
+
+//db.put('Device 11', "/strmv1/certreq1", function(err) {
+ db.put({ C: 'US', O: 'PacRT', OU: 'PacRT Hardware', CN: 'Device 11' }, "/strmv1/certreq", function(err) {
+    if(err) {
+        return log.error('Oops! ', err)
+    }
+})
+
+db.get({ C: 'US', O: 'PacRT', OU: 'PacRT Hardware', CN: 'Device 11' }, function(err, value) {
+    if(err) {
+        return log.error('Oops! ', err)
+    } else {
+        log.info('Value: ', value)
+    }
+})
 
 module.exports =
 {
@@ -34,12 +58,25 @@ module.exports =
     auth_scheme: {clientcert: true},
 
     authorizePublish: function (topic, subject, callback) {
-        console.log('Authorize publish from config is called.....')
-        callback(null);
+        console.log('Authorize publish from config is called..... Subject: ', subject)
+        db.get(subject, function(err, value) {
+            if(err) {
+                log.info('Error: ', err)
+                callback(new Error('Not authorized to publish'));
+                //return log.info('Oops! ', err)
+            } else {
+                log.info('Topic: ', value)
+                if(topic === value) {
+                    callback(null)
+                } else {
+                    callback(new Error('Not authorized to publish'));
+                }
+            }
+        })
     },
 
     authorizeSubscribe: function (topic, subject, callback) {
-        console.log('Authorize subscribe from config is called.....')
+        console.log('Authorize subscribe from config is called..... Subject: ', subject)
         callback(null);
     }
 }

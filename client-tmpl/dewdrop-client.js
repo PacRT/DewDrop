@@ -32,3 +32,5 @@ client.on('message', function(topic, message, packet) {
 
 client.publish('/strmv1/certreq', encode({nodeid: 'mynodeid', pass: 'pass'}));
 
+//client.publish('aaaa', encode({nodeid: 'mynodeid', pass: 'pass'}));
+

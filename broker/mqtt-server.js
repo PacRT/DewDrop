@@ -2,7 +2,8 @@
 
 var tls = require('tls');
 //var fs        = require('fs');
-var mqstream = require('mqstream')();
+//var mqstream = require('mqstream')();
+var mqstream = require('aedes')();
 var http = require('http');
 var https = require('https');
 var net = require('net');
@@ -109,7 +110,8 @@ mqstream.authenticate = function (client, username, password, callback) {
 
 mqstream.authorizePublish = function (client, packet, callback) {
     log.info('AuthorizePublish is called')
-    if (packet.topic === 'aaaa') {
+    if (packet.topic === '/aaaa/bb') {
+        log.warn('Wrong topic', packet.topic)
         return callback(new Error('wrong topic'))
     }
 
@@ -122,13 +124,21 @@ mqstream.authorizePublish = function (client, packet, callback) {
 
         if(client.conn.server.requestCert) {
             config.authorizePublish(packet.topic, client.conn.getPeerCertificate().subject, function (err) {
-                if (err) return callback(new Error('Not authorized to publish on topic: ' + packet.topic))
+                if (err) {
+                    log.warn('Not authorized to publish on topic: ', packet.topic)
+                    return callback(new Error('Not authorized to publish on topic: ' + packet.topic))
+                }
+                else
+                    return callback(null)
             });
         } else {
             log.warn('CAREFUL!!!! Unsecured connection is being used.. Consider switching off all the ports except 8883');
+            return callback(null)
         }
+    } else {
+        log.warn('CAREFUL!!!! anybody can publish to most any topic')
+        return callback(null)
     }
-    callback(null)
 }
 
 mqstream.authorizeSubscribe = function (client, packet, callback) {
