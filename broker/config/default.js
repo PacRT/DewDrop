@@ -1,5 +1,6 @@
 var file = require('fs').readFileSync
 var path = require('path')
+var neo4j = require('neo4j-driver').v1
 
 var bunyan = require('bunyan')
 
