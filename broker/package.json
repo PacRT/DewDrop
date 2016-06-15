@@ -36,6 +36,7 @@
     "leveldown": "1.4.6",
     "memdown": "^1.2.0",
     "collections": "^5.0.0",
-    "neo4j-driver": "^1.0.2"
+    "neo4j-driver": "^1.0.2",
+    "stringify-object": "^2.4.0"
   }
 }

@@ -2,6 +2,8 @@ var file = require('fs').readFileSync
 var path = require('path')
 var neo4j = require('neo4j-driver').v1
 
+var stringify = require('stringify-object')
+
 var bunyan = require('bunyan')
 
 var levelup = require('levelup')
@@ -98,11 +100,17 @@ module.exports =
             }
         })*/
         var neosession = driver.session()
+        var neoobject = stringify(subject, {indent: ' '})
         neosession
-            .run("match (n " +subject+ ")")
+            .run("match (n " + neoobject + ") return n")
             .then(function(result){
                 log.info("Result: ", result)
-                callback(null) // callback with no error
+                //var count = 0
+                if(result.records.length > 0) {
+                    callback(null) // callback with no error
+                } else {
+                    callback(new Error('Authorization could not be obtained - no match found'))
+                }
             })
             .catch(function(error) {
                 log.warn("neo4j error happened: ", error)
