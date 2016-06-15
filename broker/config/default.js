@@ -10,7 +10,7 @@ var memdown = require('memdown')
 
 var log = bunyan.createLogger({name: "DewDropQ-Config"})
 
-var driver = neo4j.driver("bolt://pacrt.io", neo4j.auth.basic("neo4j", "neo4j"));
+var driver = neo4j.driver("bolt://pacrt.io", neo4j.auth.basic("neo4j", "neo4j123"));
 var session = driver.session();
 log.info("Neo4J driver instantiated")
 session
