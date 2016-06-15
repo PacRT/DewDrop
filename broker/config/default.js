@@ -24,6 +24,9 @@ session
         session.close();
         driver.close();
     })
+    .catch(function (error) {
+        log.erro('Error occurred with neo4j', error)
+    })
 
 
 var db = levelup('./my.db', {valueEncoding: 'json'})
@@ -80,7 +83,7 @@ module.exports =
 
     authorizePublish: function (topic, subject, callback) {
         console.log('Authorize publish from config is called..... Subject: ', subject)
-        db.get(subject, function(err, value) {
+        /*db.get(subject, function(err, value) {
             if(err) {
                 log.info('Error: ', err)
                 callback(new Error('Not authorized to publish'));
@@ -93,11 +96,22 @@ module.exports =
                     callback(new Error('Not authorized to publish'));
                 }
             }
-        })
+        })*/
+        var neosession = driver.session()
+        neosession
+            .run("match (n " +subject+ ")")
+            .then(function(result){
+                log.info("Result: ", result)
+                callback(null) // callback with no error
+            })
+            .catch(function(error) {
+                log.warn("neo4j error happened: ", error)
+                callback(new Error('Authorization could not be obtained'))
+            })
     },
 
     authorizeSubscribe: function (topic, subject, callback) {
-        console.log('Authorize subscribe from config is called..... Subject: ', subject)
+        log.info('Authorize subscribe from config is called..... Subject: ', subject)
         callback(null);
     }
 }
