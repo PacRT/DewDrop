@@ -7,6 +7,22 @@ var bunyan = require('bunyan')
 var levelup = require('levelup')
 //var leveldown = require('leveldown')
 var memdown = require('memdown')
+
+var driver = neo4j.driver("bolt://localhost", neo4j.auth.basic("neo4j", "neo4j"));
+var session = driver.session();
+session
+    .run( "CREATE (a:Person {name:'Arthur', title:'King'})" )
+    .then( function()
+    {
+        return session.run( "MATCH (a:Person) WHERE a.name = 'Arthur' RETURN a.name AS name, a.title AS title" )
+    })
+    .then( function( result ) {
+        console.log( result.records[0].get("title") + " " + result.records[0].get("name") );
+        session.close();
+        driver.close();
+    })
+
+
 var db = levelup('./my.db', {valueEncoding: 'json'})
     /*, multilevelHttp = require('multilevel-http')
     , http = require('http')
