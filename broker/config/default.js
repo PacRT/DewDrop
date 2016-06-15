@@ -8,8 +8,11 @@ var levelup = require('levelup')
 //var leveldown = require('leveldown')
 var memdown = require('memdown')
 
+var log = bunyan.createLogger({name: "DewDropQ-Config"})
+
 var driver = neo4j.driver("bolt://localhost", neo4j.auth.basic("neo4j", "neo4j"));
 var session = driver.session();
+log.info("Neo4J driver instantiated")
 session
     .run( "CREATE (a:Person {name:'Arthur', title:'King'})" )
     .then( function()
@@ -17,7 +20,7 @@ session
         return session.run( "MATCH (a:Person) WHERE a.name = 'Arthur' RETURN a.name AS name, a.title AS title" )
     })
     .then( function( result ) {
-        console.log( result.records[0].get("title") + " " + result.records[0].get("name") );
+        log.info( result.records[0].get("title") + " " + result.records[0].get("name") );
         session.close();
         driver.close();
     })
@@ -35,7 +38,6 @@ server.listen(3000, function(){
     console.log('listening on port %d...', 3000)
 }) */
 
-var log = bunyan.createLogger({name: "DewDropQ-Config"})
 
 //db.put('Device 11', "/strmv1/certreq1", function(err) {
  db.put({ C: 'US', O: 'PacRT', OU: 'PacRT Hardware', CN: 'Device 11' }, "/strmv1/certreq", function(err) {
