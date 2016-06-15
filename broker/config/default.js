@@ -4,9 +4,19 @@ var path = require('path')
 var bunyan = require('bunyan')
 
 var levelup = require('levelup')
-var leveldown = require('leveldown')
+//var leveldown = require('leveldown')
 var memdown = require('memdown')
-var db = levelup('./db')
+var db = levelup('./my.db', {valueEncoding: 'json'})
+    /*, multilevelHttp = require('multilevel-http')
+    , http = require('http')
+
+var app = multilevelHttp.server(db)
+
+var server = http.createServer(app)
+
+server.listen(3000, function(){
+    console.log('listening on port %d...', 3000)
+}) */
 
 var log = bunyan.createLogger({name: "DewDropQ-Config"})
 
@@ -14,14 +24,6 @@ var log = bunyan.createLogger({name: "DewDropQ-Config"})
  db.put({ C: 'US', O: 'PacRT', OU: 'PacRT Hardware', CN: 'Device 11' }, "/strmv1/certreq", function(err) {
     if(err) {
         return log.error('Oops! ', err)
-    }
-})
-
-db.get({ C: 'US', O: 'PacRT', OU: 'PacRT Hardware', CN: 'Device 11' }, function(err, value) {
-    if(err) {
-        return log.error('Oops! ', err)
-    } else {
-        log.info('Value: ', value)
     }
 })
 
