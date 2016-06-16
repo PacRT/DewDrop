@@ -139,13 +139,13 @@ module.exports =
                     callback(null) // callback with no error
                 } else {
                     session.close()
-                    callback(new Error('Authorization could not be obtained - no match found'))
+                    callback(new Error('Authorization could not be obtained for topic: ',topic, ' - no match found'))
                 }
             })
             .catch(function(error) {
                 log.warn("neo4j error happened: ", error)
                 session.close()
-                callback(new Error('Authorization could not be obtained'))
+                callback(new Error('Authorization could not be obtained for topic: ', topic))
             })
     },
 
