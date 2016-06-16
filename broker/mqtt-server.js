@@ -148,7 +148,7 @@ mqstream.authorizeSubscribe = function (client, packet, callback) {
     if (packet.topic === 'bbb') {
         // overwrites subscription
         packet.qos = packet.qos + 128
-        return callback(null, topic)
+        return callback(null, packet)
     }
     if (config.authorizeSubscribe != null) {
         if(client.conn.server.requestCert) {
@@ -164,9 +164,10 @@ mqstream.authorizeSubscribe = function (client, packet, callback) {
             log.warn('CAREFUL!!!! Unsecured connection is being used.. Consider switching off all the ports except 8883');
             return callback(null, packet)
         }
+    } else {
+        log.warn('CAREFUL!!!! anybody can subscribe to most any topic')
+        return callback(null, packet)
     }
-    log.warn('CAREFUL!!!! anybody can subscribe to most any topic')
-    return callback(null, packet)
 }
 
 // Cleanly shut down process on SIGTERM to ensure that perf-<pid>.map gets flushed
