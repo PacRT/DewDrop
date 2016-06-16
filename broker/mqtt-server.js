@@ -148,18 +148,25 @@ mqstream.authorizeSubscribe = function (client, packet, callback) {
     if (packet.topic === 'bbb') {
         // overwrites subscription
         packet.qos = packet.qos + 128
+        return callback(null, topic)
     }
     if (config.authorizeSubscribe != null) {
         if(client.conn.server.requestCert) {
             config.authorizeSubscribe(packet.topic, client.conn.getPeerCertificate().subject, function (err) {
-                if (err) return callback(new Error('Not authorized to publish on topic: ' + packet.topic))
+                if (err) {
+                    return callback(new Error('Not authorized to publish on topic: ' + packet.topic))
+                } else {
+                    return callback(null, packet)
+                }
+
             });
         } else {
             log.warn('CAREFUL!!!! Unsecured connection is being used.. Consider switching off all the ports except 8883');
+            return callback(null, packet)
         }
     }
 
-    callback(null, packet)
+    return callback(null, packet)
 }
 
 // Cleanly shut down process on SIGTERM to ensure that perf-<pid>.map gets flushed
