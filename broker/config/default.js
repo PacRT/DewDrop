@@ -125,7 +125,28 @@ module.exports =
 
     authorizeSubscribe: function (topic, subject, callback) {
         log.info('Authorize subscribe from config is called..... Subject: ', subject)
-        callback(null);
+        var neosession = driver.session()
+        var neoobject = stringify(subject, {indent: ' '})
+        neosession
+            .run("match (n " + neoobject + ")-[:OPS {sub: true}]-> ({name: '" + topic + "'}) return count(n) AS count")
+            .then(function(result){
+                log.info("Result: ", result)
+                log.info("result.records[0]: ", result.records[0])
+                log.info("result.records[0].get('count').low: ", result.records[0].get('count').low)
+                //var count = 0
+                if(result.records[0].get('count').low > 0) {
+                    session.close()
+                    callback(null) // callback with no error
+                } else {
+                    session.close()
+                    callback(new Error('Authorization could not be obtained - no match found'))
+                }
+            })
+            .catch(function(error) {
+                log.warn("neo4j error happened: ", error)
+                session.close()
+                callback(new Error('Authorization could not be obtained'))
+            })
     },
 
     cleanup: function() {
