@@ -154,6 +154,7 @@ mqstream.authorizeSubscribe = function (client, packet, callback) {
         if(client.conn.server.requestCert) {
             config.authorizeSubscribe(packet.topic, client.conn.getPeerCertificate().subject, function (err) {
                 if (err) {
+                    log.warn('Something silly happend in subscription: ', err)
                     return (null, null) //To negate a subscription, set the subscription to null
                     //return callback(new Error('Not authorized to subscribe on topic: ' + packet.topic))
                 } else {
