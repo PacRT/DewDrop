@@ -169,5 +169,6 @@ function onSIGINT() {
     // IMPORTANT to log on stderr, to not clutter stdout which is purely for data, i.e. dtrace stacks
     console.error('Caught SIGTERM, shutting down.');
     server.close();
+    config.cleanup();
     process.exit(0);
 }
