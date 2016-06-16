@@ -1,0 +1,2 @@
+sudo docker build -f Dockerfile-redis -t redis .
+sudo docker run --name redis -d redis

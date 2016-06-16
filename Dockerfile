@@ -68,6 +68,8 @@ WORKDIR /
 
 COPY broker broker
 
+COPY client-tmpl client-tmpl
+
 WORKDIR /broker
 
 RUN npm install
@@ -76,7 +78,7 @@ RUN npm install bunyan -g
 
 RUN npm install pm2 -g
 
-WORKDIR /broker/client-tmpl
+WORKDIR /client-tmpl
 
 RUN npm install
 
