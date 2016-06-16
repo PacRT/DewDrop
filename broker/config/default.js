@@ -108,7 +108,7 @@ module.exports =
                 log.info("result.records[0]: ", result.records[0])
                 log.info("result.records[0].get('count').low: ", result.records[0].get('count').low)
                 //var count = 0
-                if(result.records.length > 0) {
+                if(result.records[0].get('count').low > 0) {
                     callback(null) // callback with no error
                 } else {
                     callback(new Error('Authorization could not be obtained - no match found'))
