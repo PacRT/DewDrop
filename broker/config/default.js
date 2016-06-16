@@ -102,10 +102,10 @@ module.exports =
         var neosession = driver.session()
         var neoobject = stringify(subject, {indent: ' '})
         neosession
-            .run("match (n " + neoobject + ")-[:PUB]-> ({name: '" + topic + "'}) return count(n)")
+            .run("match (n " + neoobject + ")-[:PUB]-> ({name: '" + topic + "'}) return count(n) AS count")
             .then(function(result){
                 log.info("Result: ", result)
-                log.info("result.records: ", result.records)
+                log.info("result.records.get('count'): ", result.records.get('count'))
                 //var count = 0
                 if(result.records.length > 0) {
                     callback(null) // callback with no error
