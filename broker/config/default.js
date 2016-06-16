@@ -102,7 +102,7 @@ module.exports =
         var neosession = driver.session()
         var neoobject = stringify(subject, {indent: ' '})
         neosession
-            .run("match (n " + neoobject + ")-[:OPS {pub: true}]-> ({name: '" + topic + "'}) return count(n) AS count")
+            .run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {pub: true}]-> ({name: '" + topic + "'}) return count(n) AS count")
             .then(function(result){
                 log.info("Result: ", result)
                 log.info("result.records[0]: ", result.records[0])
@@ -128,7 +128,7 @@ module.exports =
         var neosession = driver.session()
         var neoobject = stringify(subject, {indent: ' '})
         neosession
-            .run("match (n " + neoobject + ")-[:OPS {sub: true}]-> ({name: '" + topic + "'}) return count(n) AS count")
+            .run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {sub: true}]-> ({name: '" + topic + "'}) return count(n) AS count")
             .then(function(result){
                 log.info("Result: ", result)
                 log.info("result.records[0]: ", result.records[0])
