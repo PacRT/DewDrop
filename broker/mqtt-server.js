@@ -154,7 +154,7 @@ mqstream.authorizeSubscribe = function (client, packet, callback) {
         if(client.conn.server.requestCert) {
             config.authorizeSubscribe(packet.topic, client.conn.getPeerCertificate().subject, function (err) {
                 if (err) {
-                    return callback(new Error('Not authorized to publish on topic: ' + packet.topic))
+                    return callback(new Error('Not authorized to subscribe on topic: ' + packet.topic))
                 } else {
                     return callback(null, packet)
                 }
@@ -165,7 +165,7 @@ mqstream.authorizeSubscribe = function (client, packet, callback) {
             return callback(null, packet)
         }
     }
-
+    log.warn('CAREFUL!!!! anybody can subscribe to most any topic')
     return callback(null, packet)
 }
 
