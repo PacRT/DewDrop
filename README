@@ -1,1 +1,27 @@
+Get and install docker on your machine. For ubuntu install apparmor package to harden the security.
+
+when you are in this folder run
+
+sudo docker build -t dewdrop .
+It will take some long time to build for the first time
+
+sudo docker run -p 8883:8883 -ti dewdrop
+this will expose the secure mqtt over 8883 port of the host machine
+
+At this point check the config/default for valid certs and other crypto configurations
+
+then run
+
+pm2 start mqtt-server.js
+Monitor the log
+
+pm2 logs mqtt-server --raw | bunyan 
  
+ 
+To run neo4j through docker 
+----------------------------
+sudo docker run --publish=7474:7474 --publish=7687:7687 --volume=/home/chiradip/neo4j/data:/data neo4j:3.0
+ 
+ 
+To connect from a socker container to another docker container in the same machine
+sudo docker run --net=host -ti dewdrop
