@@ -23,5 +23,5 @@ To run neo4j through docker
 sudo docker run --publish=7474:7474 --publish=7687:7687 --volume=/home/chiradip/neo4j/data:/data neo4j:3.0
  
  
-To connect from a socker container to another docker container in the same machine
+To connect from a docker container to another docker container in the same machine
 sudo docker run --net=host -ti dewdrop
