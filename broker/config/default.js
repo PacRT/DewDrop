@@ -106,7 +106,7 @@ module.exports =
             .then(function(result){
                 log.info("Result: ", result)
                 log.info("result.records[0]: ", result.records[0])
-                log.info("result.records[0].get('count'): ", result.records[0].get('count'))
+                log.info("result.records[0].get('count').low: ", result.records[0].get('count').low)
                 //var count = 0
                 if(result.records.length > 0) {
                     callback(null) // callback with no error
