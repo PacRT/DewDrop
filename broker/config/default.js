@@ -105,6 +105,7 @@ module.exports =
             .run("match (n " + neoobject + ")-[:PUB]-> ({name: '" + topic + "'}) return count(n)")
             .then(function(result){
                 log.info("Result: ", result)
+                log.info("result.records[0]: ", result.records[0])
                 //var count = 0
                 if(result.records.length > 0) {
                     callback(null) // callback with no error
