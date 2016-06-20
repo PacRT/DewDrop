@@ -13,7 +13,7 @@ var memdown = require('memdown')
 var log = bunyan.createLogger({name: "DewDropQ-Config"})
 
 var driver = neo4j.driver("bolt://pacrt.io", neo4j.auth.basic("neo4j", "neo4j123"));
-var session = driver.session();
+/*var session = driver.session();
 log.info("Neo4J driver instantiated")
 session
     .run( "CREATE (a:Person {name:'Arthur', title:'King'})" )
@@ -28,11 +28,11 @@ session
     })
     .catch(function (error) {
         log.erro('Error occurred with neo4j', error)
-    })
+    })*/
 
 
-var db = levelup('./my.db', {valueEncoding: 'json'})
-    /*, multilevelHttp = require('multilevel-http')
+/*var db = levelup('./my.db', {valueEncoding: 'json'})
+    , multilevelHttp = require('multilevel-http')
     , http = require('http')
 
 var app = multilevelHttp.server(db)
@@ -41,7 +41,7 @@ var server = http.createServer(app)
 
 server.listen(3000, function(){
     console.log('listening on port %d...', 3000)
-}) */
+})
 
 
 //db.put('Device 11', "/strmv1/certreq1", function(err) {
@@ -49,7 +49,7 @@ server.listen(3000, function(){
     if(err) {
         return log.error('Oops! ', err)
     }
-})
+}) */
 
 module.exports =
 {
@@ -101,7 +101,10 @@ module.exports =
         var neosession = driver.session()
         var neoobject = stringify(subject, {indent: ' '})
         neosession
-            .run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {pub: true}]-> ({name: '" + topic + "'}) return count(n) AS count")
+            //.run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {pub: true}]-> ({name: '" + topic + "'}) return count(n) AS count")
+            .run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {pub: true}]-> (topic :Topic) " +
+                "where topic.name =~ '" +topic+ ".*' " +
+                "return count(n) AS count")
             .then(function(result){
                 log.info("Result: ", result)
                 log.info("result.records[0]: ", result.records[0])
@@ -127,7 +130,10 @@ module.exports =
         var neosession = driver.session()
         var neoobject = stringify(subject, {indent: ' '})
         neosession
-            .run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {sub: true}]-> ({name: '" + topic + "'}) return count(n) AS count")
+            //.run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {sub: true}]-> ({name: '" + topic + "'}) return count(n) AS count")
+            .run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {sub: true}]-> (topic :Topic) " +
+                "where topic.name =~ '" +topic+ ".*' " +
+                "return count(n) AS count")
             .then(function(result){
                 log.info("Result: ", result)
                 log.info("result.records[0]: ", result.records[0])

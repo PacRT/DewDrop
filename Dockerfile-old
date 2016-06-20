@@ -1,6 +1,6 @@
 # Get Ubuntu Image
 
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 
 # Docker Maintainer
 
@@ -8,31 +8,31 @@ MAINTAINER sandeep
 
 # get all the required base packages to build and make
 
-RUN apt-get update
+RUN sudo apt-get update 
 
-RUN apt-get --assume-yes install software-properties-common
+RUN sudo apt-get --assume-yes install software-properties-common
 
-RUN add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe"
+RUN sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe"
 
-RUN apt-get update \
+RUN sudo apt-get update \
 
-    && apt-get --assume-yes install build-essential \
+    && sudo apt-get --assume-yes install build-essential \
 
-    && apt-get --assume-yes install wget \
+    && sudo apt-get --assume-yes install wget \
 
-    && apt-get --assume-yes install python \
+    && sudo apt-get --assume-yes install python \
 
-    && apt-get --assume-yes install git
+    && sudo apt-get --assume-yes install git
 
 # Download NodeJS and build it
 
 WORKDIR /tmp
 
-RUN wget https://nodejs.org/dist/v4.4.5/node-v4.4.5.tar.gz
+RUN wget https://nodejs.org/dist/v4.3.1/node-v4.3.1.tar.gz
 
-RUN tar -xzf node-v4.4.5.tar.gz
+RUN sudo tar -xzf node-v4.3.1.tar.gz
 
-WORKDIR node-v4.4.5
+WORKDIR node-v4.3.1
 
 RUN ./configure && make && make install 
 
@@ -44,7 +44,7 @@ RUN apt-get --assume-yes remove openssl
 
 WORKDIR /tmp
 
-RUN git clone --branch OpenSSL_1_0_2g git://github.com/openssl/openssl.git
+RUN git clone --branch OpenSSL_1_0_2f git://github.com/openssl/openssl.git
 
 WORKDIR /tmp/openssl
 
