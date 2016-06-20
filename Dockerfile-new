@@ -12,17 +12,17 @@ RUN apt-get update
 
 RUN apt-get --assume-yes install software-properties-common
 
-RUN sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe"
+RUN add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe"
 
-RUN sudo apt-get update \
+RUN apt-get update \
 
-    && sudo apt-get --assume-yes install build-essential \
+    && apt-get --assume-yes install build-essential \
 
-    && sudo apt-get --assume-yes install wget \
+    && apt-get --assume-yes install wget \
 
-    && sudo apt-get --assume-yes install python \
+    && apt-get --assume-yes install python \
 
-    && sudo apt-get --assume-yes install git
+    && apt-get --assume-yes install git
 
 # Download NodeJS and build it
 
@@ -30,7 +30,7 @@ WORKDIR /tmp
 
 RUN wget https://nodejs.org/dist/v4.4.5/node-v4.4.5.tar.gz
 
-RUN sudo tar -xzf node-v4.4.5.tar.gz
+RUN tar -xzf node-v4.4.5.tar.gz
 
 WORKDIR node-v4.4.5
 
