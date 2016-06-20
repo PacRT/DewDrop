@@ -111,16 +111,16 @@ module.exports =
                 log.info("result.records[0].get('count').low: ", result.records[0].get('count').low)
                 //var count = 0
                 if(result.records[0].get('count').low > 0) {
-                    session.close()
+                    neosession.close()
                     callback(null) // callback with no error
                 } else {
-                    session.close()
+                    neosession.close()
                     callback(new Error('Authorization could not be obtained - no match found'))
                 }
             })
             .catch(function(error) {
                 log.warn("neo4j error happened: ", error)
-                session.close()
+                neosession.close()
                 callback(new Error('Authorization could not be obtained'))
             })
     },
@@ -140,16 +140,16 @@ module.exports =
                 log.info("result.records[0].get('count').low: ", result.records[0].get('count').low)
                 //var count = 0
                 if(result.records[0].get('count').low > 0) {
-                    session.close()
+                    neosession.close()
                     callback(null) // callback with no error
                 } else {
-                    session.close()
+                    neosession.close()
                     callback(new Error('Authorization could not be obtained for topic: ',topic, ' - no match found'))
                 }
             })
             .catch(function(error) {
                 log.warn("neo4j error happened: ", error)
-                session.close()
+                neosession.close()
                 callback(new Error('Authorization could not be obtained for topic: ', topic))
             })
     },
