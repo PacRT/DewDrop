@@ -100,11 +100,15 @@ module.exports =
         })*/
         var neosession = driver.session()
         var neoobject = stringify(subject, {indent: ' '})
+        var neotopic = topic;
+        if(topic.indexOf('/strmv1/gencert/cert/') > -1) {
+            neotopic = '/strmv1/gencert/cert/';
+        }
         neosession
-            //.run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {pub: true}]-> ({name: '" + topic + "'}) return count(n) AS count")
-            .run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {pub: true}]-> (topic :Topic) " +
+            .run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {pub: true}]-> ({name: '" + neotopic + "'}) return count(n) AS count")
+            /*.run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {pub: true}]-> (topic :Topic) " +
                 "where topic.name =~ '" +topic+ ".*' " +
-                "return count(n) AS count")
+                "return count(n) AS count") */
             .then(function(result){
                 log.info("Result: ", result)
                 log.info("result.records[0]: ", result.records[0])
@@ -129,11 +133,15 @@ module.exports =
         log.info('Authorize subscribe from config is called..... Subject: ', subject)
         var neosession = driver.session()
         var neoobject = stringify(subject, {indent: ' '})
+        var neotopic = topic;
+        if(topic.indexOf('/strmv1/gencert/cert/') > -1) {
+            neotopic = '/strmv1/gencert/cert/';
+        }
         neosession
-            //.run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {sub: true}]-> ({name: '" + topic + "'}) return count(n) AS count")
-            .run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {sub: true}]-> (topic :Topic) " +
+            .run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {sub: true}]-> ({name: '" + neotopic + "'}) return count(n) AS count")
+            /*.run("match (n " + neoobject + ")-[:MEMBER_OF*0..2]->()-[:OPS {sub: true}]-> (topic :Topic) " +
                 "where topic.name =~ '" +topic+ ".*' " +
-                "return count(n) AS count")
+                "return count(n) AS count")*/
             .then(function(result){
                 log.info("Result: ", result)
                 log.info("result.records[0]: ", result.records[0])
