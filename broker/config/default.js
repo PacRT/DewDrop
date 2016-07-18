@@ -101,6 +101,7 @@ module.exports =
         var neosession = driver.session()
         var neoobject = stringify(subject, {indent: ' '})
         var neotopic = topic;
+        log.info('Topic: ', topic)
         if(topic.indexOf('/strmv1/gencert/cert/') > -1) {
             neotopic = '/strmv1/gencert/cert/';
         }
