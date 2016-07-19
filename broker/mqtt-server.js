@@ -13,7 +13,21 @@ var bunyan = require('bunyan');
 
 var numClient = 0;
 
-var log = bunyan.createLogger({name: 'DewDropQ'});
+//var log = bunyan.createLogger({name: 'DewDropQ'});
+
+var log = bunyan.createLogger({
+  name: 'DewDropQ',
+  streams: [
+    {
+      level: 'info',
+      path: '/var/log/DewDropQ-info.log'  // log INFO to a file for ELK
+    },
+    {
+      level: 'error',
+      path: '/var/log/DewDropQ-error.log'  // log ERROR and above to a file
+    }
+  ]
+});
 
 var server; // global variable to have a clean EXIT
 
