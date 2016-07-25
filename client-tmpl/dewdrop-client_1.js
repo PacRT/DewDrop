@@ -23,11 +23,11 @@ var client  = mqtt.connect('mqtt://localhost', config.mqtt);
 
 //client.subscribe('/strmv1/gencert/cert/mynodeid');
 
-client.subscribe('aaaa');
+client.subscribe('aaaaa');
 
 client.on('message', function(topic, message, packet) {
-    var certpack = decode(message);
-    console.log('Message on topic certreq: ', certpack);
+    //var certpack = decode(message);
+    console.log('Message on topic certreq: ', message);
 });
 
 client.publish('/strmv1/certreq', encode({nodeid: 'mynodeid', pass: 'pass'}));

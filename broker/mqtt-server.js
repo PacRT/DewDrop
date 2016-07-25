@@ -11,6 +11,7 @@ var websocket = require('websocket-stream');
 var config = require('config');
 var bunyan = require('bunyan');
 
+
 var numClient = 0;
 
 //var log = bunyan.createLogger({name: 'DewDropQ'});
@@ -157,6 +158,7 @@ mqstream.authorizePublish = function (client, packet, callback) {
 
 mqstream.authorizeSubscribe = function (client, packet, callback) {
     if (packet.topic === 'aaaa') {
+        log.warn('Subscription loop')
         return callback(new Error('wrong topic'))
     }
     if (packet.topic === 'bbb') {
