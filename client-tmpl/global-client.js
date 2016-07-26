@@ -22,7 +22,7 @@ var client = elasticsearch.Client({
 
 
 
-// ES variable initialization start
+// ES variable initialization start //
 var elasticsearch = require('elasticsearch');
 var esclient = new elasticsearch.Client({
     host: 'localhost:9200'
